@@ -29,16 +29,19 @@ public class Compressor {
                     }
 
 //                  Add the counter to the string, refresh counter, and move to next letter
+//                  For the last one we do not reinitialize the counter as we will use it later on
                     compressedString.append(counter);
-                    counter = 1;
+                    if(i < inputLength - 2) {
+                        counter = 1;
+                    }
                     i++;
 
                 }
 //              If last character is the same as the one before update the counter on the last character
                 if(input.substring(inputLength - 2, inputLength - 1).equals(input.substring(inputLength - 1, inputLength))){
-                    int lastCount = Integer.valueOf(compressedString.substring(compressedString.length() - 1, compressedString.length()));
-                compressedString.delete(compressedString.length() - 1, compressedString.length());
-                    compressedString.append(lastCount + 1);
+                    int counterDigits = Integer.toString(counter).length();
+                compressedString.delete(compressedString.length() - counterDigits, compressedString.length());
+                    compressedString.append(counter + 1);
                 }
 
 //                 Add last character to the string!
